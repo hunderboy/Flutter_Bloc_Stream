@@ -12,7 +12,7 @@ class RandomList extends StatefulWidget {
 
 class _RandomListState extends State<RandomList> {
   final List<WordPair> _suggestions = <WordPair>[]; // 단어 배열
-  final Set<WordPair> _saved = Set<WordPair>(); // '좋아요'한 단어 set
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _RandomListState extends State<RandomList> {
               icon: Icon(Icons.list),
               onPressed: (){
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => SavedList(saved: _saved))
+                  MaterialPageRoute(builder: (context) => SavedList())
                 );
               }
             )
@@ -34,25 +34,32 @@ class _RandomListState extends State<RandomList> {
   }
 
   Widget _buildList() {
-    return ListView.builder(itemBuilder: (context, index) {
-      // 0 2 4 6 8 = real items
-      // 1 3 5 7 9 = dividers
-      if (index.isOdd) {
-        // 홀수면
-        return Divider();
-      }
-      var realIndex = index ~/ 2; // index를 2로 나눈 몫
-      if (realIndex >= _suggestions.length) {
-        _suggestions.addAll(generateWordPairs().take(10));
-      }
+    return StreamBuilder<Set<WordPair>>(
+      stream: bloc.savedStream,
+      builder: (context, snapshot) {  // snapshot 은 데이터가 변경되서 올때마다 오는 데이터 지칭한다.
+        return ListView.builder(itemBuilder: (context, index) {
+          // 0 2 4 6 8 = real items
+          // 1 3 5 7 9 = dividers
+          if (index.isOdd) {
+            // 홀수면
+            return Divider();
+          }
+          var realIndex = index ~/ 2; // index를 2로 나눈 몫
+          if (realIndex >= _suggestions.length) {
+            _suggestions.addAll(generateWordPairs().take(10));
+          }
 
-      return _bulidRow(_suggestions[realIndex]);
-    });
+          return _bulidRow(snapshot.data, _suggestions[realIndex]);
+        });
+      }
+    );
   }
 
-  Widget _bulidRow(WordPair pair) {
+  Widget _bulidRow(Set<WordPair>? saved , WordPair pair) {
+
     final bool alreadySaved =
-        _saved.contains(pair); // Saved 안에 pair 라는 단어가 있냐 없냐
+    saved==null? false : // saved 가 null 이면 기본 false
+    saved.contains(pair); // null 이 아니면 포함여부에 따라 t/f
 
     return ListTile(
       title: Text(pair.asPascalCase, textScaleFactor: 1.5),
@@ -62,15 +69,8 @@ class _RandomListState extends State<RandomList> {
         color: Colors.pink,
       ),
       onTap: () {
-        setState(() { // setState 는 상태가 변경됨을 적용시켜준다.
-          if (alreadySaved) {
-          _saved.remove(pair);
-          } else {
-          _saved.add(pair);
-          } // false
-
-          print(_saved.toString());
-        });
+        // 더이상 setState 는 필요가 없다.
+        bloc.addToOrRemoveFromSavedList(pair);
       },
     );
   }

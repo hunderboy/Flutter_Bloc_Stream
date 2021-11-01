@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 class Bloc{
   Set<WordPair> saved = Set<WordPair>();
 
-  final _savedController = StreamController<Set<WordPair>>();
+  final _savedController = StreamController<Set<WordPair>>.broadcast();
 
-  get savedListStream => _savedController.stream;
+  get savedStream => _savedController.stream;
+
+  get addCurrentSaved => _savedController.sink.add(saved);
 
   // 데이터 추가 or 삭제
   addToOrRemoveFromSavedList(WordPair item){

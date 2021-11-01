@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'bloc/Bloc.dart';
 
 class SavedList extends StatefulWidget {
-  SavedList({required this.saved});
-
-  final Set<WordPair> saved;
 
   @override
   _SavedListState createState() => _SavedListState();
@@ -25,15 +22,32 @@ class _SavedListState extends State<SavedList> {
   }
 
   Widget _buildList() {
-    return ListView.builder(
-        itemCount: widget.saved.length * 2,
-        itemBuilder: (context, index) {
-          if (index.isOdd) return Divider(); // 1 3 5 7
+    return StreamBuilder<Set<WordPair>>(
+      stream: bloc.savedStream,
+      builder: (context, snapshot) {
+        var saved = Set<WordPair>();
 
-          var realIndex = index ~/ 2;
+        // final bool alreadySaved =
+        // saved==null? false : // saved 가 null 이면 기본 false
+        // saved.contains(pair); // null 이 아니면 포함여부에 따라 t/f
 
-          return _buildRow(widget.saved.toList()[realIndex]); // 0 2 4 6 8
-        });
+        if(snapshot.hasData){
+          saved.addAll(snapshot.data);
+        }else{
+          bloc.addCurrentSaved;
+        }
+
+        return ListView.builder(
+            itemCount: snapshot.data!.length * 2,
+            itemBuilder: (context, index) {
+              if (index.isOdd) return Divider(); // 1 3 5 7
+
+              var realIndex = index ~/ 2;
+
+              return _buildRow(saved.toList()[realIndex]); // 0 2 4 6 8
+            });
+      }
+    );
   }
 
   Widget _buildRow(WordPair pair) {
@@ -43,9 +57,7 @@ class _SavedListState extends State<SavedList> {
         textScaleFactor: 1.5,
       ),
       onTap: (){
-        setState(() {
-          widget.saved.remove(pair);
-        });
+        bloc.addToOrRemoveFromSavedList(pair);
       },
     );
   }
