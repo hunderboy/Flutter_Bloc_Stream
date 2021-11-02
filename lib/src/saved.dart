@@ -32,7 +32,7 @@ class _SavedListState extends State<SavedList> {
         // saved.contains(pair); // null 이 아니면 포함여부에 따라 t/f
 
         if(snapshot.hasData){
-          saved.addAll(snapshot.data);
+          saved.addAll(snapshot.data!);
         }else{
           bloc.addCurrentSaved;
         }
