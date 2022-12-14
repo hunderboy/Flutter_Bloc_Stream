@@ -3,9 +3,8 @@
 import 'dart:async';
 
 class CountBloc {
+
   int _count = 0;
-
-
   /**
       Single-subscription Streams
       Stream의 lifetime(생명주기) 동안 한 개의 Listener만 허용합니다.
@@ -20,12 +19,15 @@ class CountBloc {
   /// final StreamController<int> _countSubject = StreamController<int>.broadcast();
   Stream<int> get count => _countSubject.stream;
 
+
   add() {
     _count++;
     _countSubject.sink.add(_count);
   }
 
+
   dispose() {
     _countSubject.close();
   }
+
 }

@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import '../bloc/count_bloc.dart';
 
 class CountView extends StatelessWidget {
-  CountBloc countBloc;
   CountView({Key? key, required this.countBloc}) : super(key: key);
+
+  CountBloc countBloc;
 
   @override
   Widget build(BuildContext context) {
     print("CountView Build!!");
     return Center(
-      child: StreamBuilder(
+      child: StreamBuilder( // StreamBuilder 사용
         stream: countBloc.count,
         initialData: 0,
         builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
@@ -22,9 +23,9 @@ class CountView extends StatelessWidget {
               )
             );
           }
-          return CircularProgressIndicator();
-        },
-      ),
+          return const CircularProgressIndicator();
+        }
+      )
     );
   }
 }
