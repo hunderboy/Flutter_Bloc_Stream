@@ -30,7 +30,8 @@ class _RandomListState extends State<RandomList> {
             )
           ]
         ),
-        body: _buildList());
+        body: _buildList()
+    );
   }
 
 
