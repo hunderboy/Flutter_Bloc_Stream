@@ -11,27 +11,28 @@ class RandomList extends StatefulWidget {
 }
 
 class _RandomListState extends State<RandomList> {
-  final List<WordPair> _suggestions = <WordPair>[]; // 단어 배열
 
+  final List<WordPair> _suggestions = <WordPair>[]; // 단어 배열
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("naming app"),
+          title: const Text("naming app"),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.list),
+              icon: const Icon(Icons.list),
               onPressed: (){
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => SavedList())
                 );
               }
             )
-          ],
+          ]
         ),
         body: _buildList());
   }
+
 
   Widget _buildList() {
     return StreamBuilder<Set<WordPair>>(
@@ -42,7 +43,7 @@ class _RandomListState extends State<RandomList> {
           // 1 3 5 7 9 = dividers
           if (index.isOdd) {
             // 홀수면
-            return Divider();
+            return const Divider();
           }
           var realIndex = index ~/ 2; // index를 2로 나눈 몫
           if (realIndex >= _suggestions.length) {
@@ -55,11 +56,10 @@ class _RandomListState extends State<RandomList> {
     );
   }
 
+
   Widget _bulidRow(Set<WordPair>? saved , WordPair pair) {
 
-    final bool alreadySaved =
-    saved==null? false : // saved 가 null 이면 기본 false
-    saved.contains(pair); // null 이 아니면 포함여부에 따라 t/f
+    final bool alreadySaved = saved==null ? false : saved.contains(pair);
 
     return ListTile(
       title: Text(pair.asPascalCase, textScaleFactor: 1.5),

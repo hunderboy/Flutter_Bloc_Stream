@@ -3,7 +3,7 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 class Bloc{
-  Set<WordPair> saved = Set<WordPair>();
+  Set<WordPair> saved = <WordPair>{};
 
   final _savedController = StreamController<Set<WordPair>>.broadcast();
 
