@@ -9,7 +9,7 @@ class Bloc{
 
   get savedStream => _savedController.stream;
 
-  get addCurrentSaved => _savedController.sink.add(saved);
+  get addCurrentSaved => _savedController.sink.add(saved); // Sink 진입점
 
   // 데이터 추가 or 삭제
   addToOrRemoveFromSavedList(WordPair item){
@@ -19,7 +19,7 @@ class Bloc{
       saved.add(item);
     }
 
-    _savedController.sink.add(saved);
+    _savedController.sink.add(saved); // Sink 진입점
   }
 
 

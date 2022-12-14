@@ -22,7 +22,7 @@ class CountBloc {
 
   add() {
     _count++;
-    _countSubject.sink.add(_count);
+    _countSubject.sink.add(_count); // Sink 진입점
   }
 
 
