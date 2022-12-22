@@ -1,5 +1,6 @@
 
 import 'package:bloc_stream_pattern/src/english_list/random_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'doom_test/test1.dart';
@@ -19,6 +20,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  String getPerson(String text){
+    if (kDebugMode) {
+      print("Hi. My name is Thierry Henry");
+    }
+    return "Hi. My name is Thierry Henry";
+  }
+
   @override
   Widget build(BuildContext context) {
     return
@@ -29,28 +38,28 @@ class _HomeState extends State<Home> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.redAccent),
-              ),
-              child: const Text("Test1"),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return const Test1();
-                }));
-              },
-            ),
-            ElevatedButton(
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.redAccent),
-              ),
-              child: const Text("Test2"),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return const Test2();
-                }));
-              },
-            ),
+            // ElevatedButton(
+            //   style: const ButtonStyle(
+            //     backgroundColor: MaterialStatePropertyAll<Color>(Colors.redAccent),
+            //   ),
+            //   child: const Text("Test1"),
+            //   onPressed: () {
+            //     Navigator.push(context, MaterialPageRoute(builder: (_) {
+            //       return const Test1();
+            //     }));
+            //   },
+            // ),
+            // ElevatedButton(
+            //   style: const ButtonStyle(
+            //     backgroundColor: MaterialStatePropertyAll<Color>(Colors.redAccent),
+            //   ),
+            //   child: const Text("Test2"),
+            //   onPressed: () {
+            //     Navigator.push(context, MaterialPageRoute(builder: (_) {
+            //       return const Test2();
+            //     }));
+            //   },
+            // ),
             ElevatedButton(
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll<Color>(Colors.redAccent),
@@ -68,9 +77,10 @@ class _HomeState extends State<Home> {
               ),
               child: const Text("Test4"),
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (_) {
-                //   return const Test4();
-                // }));
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  /// 파라미터가 Funcion 이라 함수명 그대로 할당
+                  return SearchInput(onSearchHandle:getPerson);
+                }));
               },
             ),
             ElevatedButton(
