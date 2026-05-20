@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 
+
+// Using a dart code, make the code below into a reactive UI code
+
 class ProductDatails extends StatefulWidget {
   final String detailsText;
   final bool visible;
@@ -13,6 +16,11 @@ class ProductDatails extends StatefulWidget {
 
 class _ProductDatailsState extends State<ProductDatails> {
   bool _visible = false;
+
+  dynamic enumType() {
+    List<int> demend = enumType();
+    print("df");
+  }
   
   @override
   void initState() {
