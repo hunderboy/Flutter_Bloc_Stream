@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/count_view_stateless.dart';
 
 class PlusStatefulDisplayWidget extends StatefulWidget {
-  PlusStatefulDisplayWidget({Key? key}) : super(key: key);
+  const PlusStatefulDisplayWidget({Key? key}) : super(key: key);
 
   @override
   _PlusStatefulDisplayWidgetState createState() =>

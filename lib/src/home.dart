@@ -37,18 +37,18 @@ class _HomeState extends State<Home> {
           children: [
             ElevatedButton(
               style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.redAccent),
+                backgroundColor: WidgetStatePropertyAll<Color>(Colors.redAccent),
               ),
               child: const Text("Test3"),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return ProductDatails(detailsText: "상세내용", visible: false);
+                  return const ProductDatails(detailsText: "상세내용", visible: false);
                 }));
               },
             ),
             ElevatedButton(
               style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.redAccent),
+                backgroundColor: WidgetStatePropertyAll<Color>(Colors.redAccent),
               ),
               child: const Text("Test4"),
               onPressed: () {
@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
             Center(
               child: ElevatedButton(
                 style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+                  backgroundColor: WidgetStatePropertyAll<Color>(Colors.green),
                 ),
                 child: const Text("Test Page"),
                 onPressed: () {
