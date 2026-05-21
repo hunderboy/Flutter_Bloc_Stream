@@ -1,6 +1,7 @@
 
 import 'package:bloc_stream_pattern/counter/view/counter_page.dart';
 import 'package:bloc_stream_pattern/src/english_list/random_list.dart';
+import 'package:bloc_stream_pattern/timer/view/timer_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -100,6 +101,16 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return const CounterPage();
+                  }));
+                },
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                child: const Text("Flutter Timer (Bloc)"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return const TimerPage();
                   }));
                 },
               ),
