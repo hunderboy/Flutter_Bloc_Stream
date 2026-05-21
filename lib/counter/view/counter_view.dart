@@ -4,12 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../counter.dart';
 
 
-/// {@template counter_view}
-/// A [StatelessWidget] which reacts to the provided
-/// [CounterCubit] state and notifies it in response to user input.
-/// {@endtemplate}
+/**
+ * 제공된 [CounterCubit] 상태에 반응하여 사용자 입력에 따라 알림을 보내는 [StatelessWidget].
+ */
 class CounterView extends StatelessWidget {
-  /// {@macro counter_view}
   const CounterView({super.key});
 
   @override
@@ -17,7 +15,7 @@ class CounterView extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: Center(
-        child: BlocBuilder<CounterCubit, int>(
+        child: BlocBuilder<CounterCubit, int>( // todo: Consumer 위젯과 거의 동일 역할
           builder: (context, state) {
             return Text('$state', style: textTheme.displayMedium);
           },

@@ -1,10 +1,9 @@
 import 'package:bloc/bloc.dart';
 
-/// {@template counter_cubit}
-/// A [Cubit] which manages an [int] as its state.
-/// {@endtemplate}
+/**
+ * [int]를 상태로 관리하는 [큐빗].
+ */
 class CounterCubit extends Cubit<int> {
-  /// {@macro counter_cubit}
   CounterCubit() : super(0);
 
   /// Add 1 to the current state.
