@@ -25,5 +25,8 @@ linter:
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 
+    # 1. /** ... */ 스타일을 썼을 때 '///를 쓰라'고 나오는 경고를 끌 때
+    slash_for_doc_comments: false
+
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

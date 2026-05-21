@@ -1,4 +1,5 @@
 
+import 'package:bloc_stream_pattern/counter/view/counter_page.dart';
 import 'package:bloc_stream_pattern/src/english_list/random_list.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,16 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return BlocDisplayWidget();
+                  }));
+                },
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                child: const Text("공식 홈페이지 bloc 패턴"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return const CounterPage();
                   }));
                 },
               ),
