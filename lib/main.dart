@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'src/home.dart';
+import 'home.dart';
 
 // 플러터는 처음 시작하면 main 함수를 먼저 찾는다. 시작점
 void main() => runApp(MyApp());

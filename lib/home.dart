@@ -3,11 +3,10 @@ import 'package:bloc_stream_pattern/src/english_list/random_list.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'doom_test/test3.dart';
-import 'doom_test/test4.dart';
-import 'stateful_vs_bloc/bloc_pattern/ui/bloc_display_widget.dart';
-import 'stateful_vs_bloc/stateful/ui/plus_stateful_display_widget.dart';
-import 'doom_test/test_page.dart';
+import 'src/doom_test/test3.dart';
+import 'src/doom_test/test4.dart';
+import 'src/stateful_vs_bloc/bloc_pattern/ui/bloc_display_widget.dart';
+import 'src/doom_test/test_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -90,16 +89,6 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return BlocDisplayWidget();
-                  }));
-                },
-              ),
-            ),
-            Center(
-              child: ElevatedButton(
-                child: const Text("기본 stateful"),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return PlusStatefulDisplayWidget();
                   }));
                 },
               ),
