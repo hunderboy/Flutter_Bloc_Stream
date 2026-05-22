@@ -7,7 +7,8 @@ import '../ticker.dart';
 part 'timer_event.dart';
 part 'timer_state.dart';
 
-class TimerBloc extends Bloc<TimerEvent, TimerState> {
+
+class TimerBloc extends Bloc<TimerEvent, TimerState> { // Bloc<이벤트, 관리할 상태>
   TimerBloc({required Ticker ticker})
       : _ticker = ticker,
         super(const TimerInitial(_kDuration)) {
