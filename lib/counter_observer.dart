@@ -14,5 +14,5 @@ class CounterObserver extends BlocObserver {
     super.onChange(bloc, change);
     // ignore: avoid_print
     print('${bloc.runtimeType} $change');
-  }
+  }// ㅌㅔ그스ㅇㅇ
 }
