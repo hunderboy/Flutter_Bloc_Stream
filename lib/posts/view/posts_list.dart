@@ -4,6 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/post_bloc.dart';
 import '../models/models.dart';
 
+// [UI] 스크롤 90% 도달
+//  │
+//  │  add(PostFetched())          ← Event 발행
+//  ▼
+// [Bloc] _onPostFetched() 실행
+//  │  state.hasReachedMax 확인    ← 현재 State를 읽음
+//  │  API 호출
+//  │  emit(state.copyWith(...))   ← 새 State 발행
+//  ▼
+// [State] PostState(
+//    status: success,
+//    posts: [...40개],              ← UI가 표현할 데이터
+//    hasReachedMax: false
+// )
+//  │
+//  ▼
+// [UI] BlocBuilder가 새 State 수신 → ListView 리빌드
+
+
 class PostsList extends StatefulWidget {
   const PostsList({super.key});
 
@@ -21,7 +40,16 @@ class _PostsListState extends State<PostsList> {
   }
 
   @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    /// Bloc 사용을 위한 BlocBuilder<PostBloc, PostState>
     return BlocBuilder<PostBloc, PostState>(
       builder: (context, state) {
         switch (state.status) {
@@ -51,25 +79,21 @@ class _PostsListState extends State<PostsList> {
   }
 
   void _onScroll() {
-    if (_isBottom) context.read<PostBloc>().add(PostFetched());
+    if (_isBottom) context.read<PostBloc>().add(PostFetched()); // Post 요청
   }
 
+  /// List 의 최하단 인지 체크하여 true,false 리턴하는 메소드
   bool get _isBottom {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
+    return currentScroll >= (maxScroll * 0.9); // 90% 지점
   }
 
-  @override
-  void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
-    super.dispose();
-  }
 }
 
+
+/// 스크롤 하단 도착시 표시되는 Loader
 class _BottomLoader extends StatelessWidget {
   const _BottomLoader();
 
@@ -85,6 +109,7 @@ class _BottomLoader extends StatelessWidget {
   }
 }
 
+/// ListView 의 Item
 class _PostListItem extends StatelessWidget {
   const _PostListItem({required this.post});
 
